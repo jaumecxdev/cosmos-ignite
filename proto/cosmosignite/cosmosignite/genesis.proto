@@ -1,0 +1,12 @@
+syntax = "proto3";
+package cosmosignite.cosmosignite;
+
+import "gogoproto/gogo.proto";
+import "cosmosignite/cosmosignite/params.proto";
+
+option go_package = "cosmos-ignite/x/cosmosignite/types";
+
+// GenesisState defines the cosmosignite module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+}

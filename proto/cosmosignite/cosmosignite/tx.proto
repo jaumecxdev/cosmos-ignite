@@ -1,0 +1,7 @@
+syntax = "proto3";
+package cosmosignite.cosmosignite;
+
+option go_package = "cosmos-ignite/x/cosmosignite/types";
+
+// Msg defines the Msg service.
+service Msg {}
