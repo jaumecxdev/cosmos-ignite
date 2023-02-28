@@ -6,6 +6,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "cosmosignite/cosmosignite/params.proto";
+import "cosmosignite/cosmosignite/post.proto";
 
 option go_package = "cosmos-ignite/x/cosmosignite/types";
 
@@ -21,6 +22,16 @@ service Query {
   // Queries a list of SayHello items.
   rpc SayHello (QuerySayHelloRequest) returns (QuerySayHelloResponse) {
     option (google.api.http).get = "/cosmos-ignite/cosmosignite/say_hello/{name}";
+  
+  }
+  
+  // Queries a list of Post items.
+  rpc Post    (QueryGetPostRequest) returns (QueryGetPostResponse) {
+    option (google.api.http).get = "/cosmos-ignite/cosmosignite/post/{id}";
+  
+  }
+  rpc PostAll (QueryAllPostRequest) returns (QueryAllPostResponse) {
+    option (google.api.http).get = "/cosmos-ignite/cosmosignite/post";
   
   }
 }
@@ -40,5 +51,22 @@ message QuerySayHelloRequest {
 
 message QuerySayHelloResponse {
   string name = 1;
+}
+
+message QueryGetPostRequest {
+  uint64 id = 1;
+}
+
+message QueryGetPostResponse {
+  Post Post = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllPostRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllPostResponse {
+  repeated Post                                   Post       = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
